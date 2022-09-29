@@ -40,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 				$_SESSION["apellido_paterno"] =  $resultado["apellido_paterno"];
 				$_SESSION["apellido_materno"] =  $resultado["apellido_materno"];
 				$_SESSION["idrol"] =  $resultado["idrol"];
+				$_SESSION["foto"] =  $resultado["foto"];
 
 
 				header('Location: ' . URL);

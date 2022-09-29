@@ -13,7 +13,7 @@
                 </a>
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                    <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" />
+                    <img src="img/avatar/<?= $_SESSION["foto"] != '' ? $_SESSION["foto"] : "fotoUserDefault.jpg"; ?>" class="avatar img-fluid rounded me-1" alt="Charles Hall" />
                     <span class="text-dark"><?= $_SESSION["nombres"].' '.$_SESSION["apellido_paterno"] ?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">

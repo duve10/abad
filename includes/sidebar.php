@@ -15,7 +15,7 @@
                 </a>
             </li>
 
-            <?php if ($_SESSION["idrol"] === '1') : ?>
+            <?php if ($_SESSION["idrol"] === '1' || $_SESSION["idrol"] === '3') : ?>
                 <li class="sidebar-item <?php echo $active_usuarios; ?>">
                     <a class="sidebar-link" href="usuarios">
                         <i class="align-middle" data-feather="user"></i>
