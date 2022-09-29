@@ -1,4 +1,3 @@
-
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="index">
@@ -9,20 +8,21 @@
         <ul class="sidebar-nav">
             <li class="sidebar-header">Datos</li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="index.html">
+            <li class="sidebar-item <?php echo $active_empresas; ?>">
+                <a class="sidebar-link" href="empresas">
                     <i class="align-middle" data-feather="sliders"></i>
                     <span class="align-middle">Empresas</span>
                 </a>
             </li>
 
-            <li class="sidebar-item <?php echo $active_usuarios; ?>">
-                <a class="sidebar-link" href="usuarios">
-                    <i class="align-middle" data-feather="user"></i>
-                    <span class="align-middle">Usuarios</span>
-                </a>
-            </li>
-
+            <?php if ($_SESSION["idrol"] === '1') : ?>
+                <li class="sidebar-item <?php echo $active_usuarios; ?>">
+                    <a class="sidebar-link" href="usuarios">
+                        <i class="align-middle" data-feather="user"></i>
+                        <span class="align-middle">Usuarios</span>
+                    </a>
+                </li>
+            <?php endif; ?>
             <li class="sidebar-item">
                 <a href="#auth" data-bs-toggle="collapse" class="sidebar-link collapsed" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users align-middle">
@@ -32,7 +32,7 @@
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                     </svg> <span class="align-middle">Maestros</span>
                 </a>
-                <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar" style="">
+                <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Tipos</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Tipos 2</a></li>
                 </ul>
