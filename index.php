@@ -1,15 +1,7 @@
 <?php
 require_once 'config/constants.php';
-// Procedimientos
-
-
-    
-
 
 $titulo = "Panel de control";
-
-
-
 ?>
 
 

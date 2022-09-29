@@ -12,9 +12,12 @@ class User
     private $apellido_materno;
     private $direccion;
     private $telefono;
-
-    public function __construct($id = 0, $nombre_usuario = '', $password = '', $nombres = '', $apellido_paterno = '', $apellido_materno = '', $direccion = '', $telefono = '')
-    {
+    private $idDocumento;
+    private $idRol;
+    private $foto;
+    
+    public function __construct($id = 0, $nombre_usuario = '', $password = '', $nombres = '', $apellido_paterno = '', $apellido_materno = '', $direccion = '', $telefono = '', $idDocumento = '', $idRol= '', $foto= '')
+    { 
         $this->id = $id;
         $this->nombre_usuario = $nombre_usuario;
         $this->password = $password;
@@ -23,6 +26,9 @@ class User
         $this->apellido_materno = $apellido_materno;
         $this->direccion = $direccion;
         $this->telefono = $telefono;
+        $this->idDocumento = $idDocumento;
+        $this->idRol = $idRol;
+        $this->foto = $foto;
     }
 
     public function getId()
@@ -39,14 +45,13 @@ class User
 
 
     public function getNombre_usuario()
-    {
+    {   
         return $this->nombre_usuario;
     }
 
     public function setNombre_usuario($nombre_usuario)
     {
         $this->nombre_usuario = $nombre_usuario;
-
         return $this;
     }
 
@@ -122,25 +127,60 @@ class User
         return $this;
     }
 
+    public function getIdDocumento()
+    {
+        return $this->idDocumento;
+    }
+ 
+    public function setIdDocumento($idDocumento)
+    {
+        $this->idDocumento = $idDocumento;
+
+        return $this;
+    }
+
+    public function getIdRol()
+    {
+        return $this->idRol;
+    }
+
+    public function setIdRol($idRol)
+    {
+        $this->idRol = $idRol;
+
+        return $this;
+    }
+
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+
+    public function setFoto($foto)
+    {
+        $this->foto = $foto;
+
+        return $this;
+    }
 
     public function insertUsuario()
     {
         try {
-            $sql = "INSERT INTO USUARIO(nombre_usuario,password,nombres,apellido_paterno,apellido_materno,direccion,telefono,id_documento,idrol) VALUES (?,?,?,?,?,?,?,1,1)";
+            $sql = "INSERT INTO USUARIO(nombre_usuario,password,nombres,apellido_paterno,apellido_materno,direccion,telefono,id_documento,idrol, foto, estado) VALUES (?,?,?,?,?,?,?,?,?,?,1)";
             $objeto = new Conexion();
             $conexion = $objeto->Conectar();
             $resultado = $conexion->prepare($sql);
-            $resultado->execute([$this->nombre_usuario,$this->password,$this->nombres,$this->apellido_paterno,$this->apellido_materno,$this->direccion,$this->telefono]); 
+            $resultado->execute([$this->nombre_usuario,$this->password,$this->nombres,$this->apellido_paterno,$this->apellido_materno,$this->direccion,$this->telefono,$this->idDocumento,$this->idRol,$this->foto]); 
         } catch (Exception $e) {
             return $e->getMessage();
         }
         
      
-        
+
     }
 
     public function getUsuarios() {
-        $sql = "SELECT * FROM usuario ORDER BY ID DESC";
+        $sql = "SELECT u.id,u.nombre_usuario,u.nombres,u.apellido_paterno,u.apellido_materno,u.foto,r.descripcion  FROM usuario as u left join rol as r on u.idrol = r.id where u.estado = 1 ORDER BY u.ID DESC";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);
@@ -153,24 +193,26 @@ class User
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);
-        $resultado->execute([$this->id]); 
-        return $resultado->fetchAll();
+        $resultado->execute([$this->id]);
+        return json_encode(($resultado->fetch(PDO::FETCH_ASSOC)));
     }
 
     public function updateUser() {
-        $sql = "UPDATE  USUARIO SET nombre_usuario = ?,password = ?,nombres = ?,apellido_paterno = ?,apellido_materno = ?,direccion = ?,telefono = ? WHERE id = ?";
+        $sql = "UPDATE  USUARIO SET password = ?,nombres = ?,apellido_paterno = ?,apellido_materno = ?,direccion = ?,telefono = ? WHERE id = ?";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);
-        $resultado->execute([$this->nombre_usuario,$this->password,$this->nombres,$this->password,$this->apellido_paterno,$this->apellido_materno,$this->direccion,$this->telefono, $this->id]); 
+        $resultado->execute([$this->password,$this->nombres,$this->apellido_paterno,$this->apellido_materno,$this->direccion,$this->telefono, $this->id]); 
     }
 
     public function deleteUser() {
-        $sql = "DELETE FROM usuario WHERE id = ?";
+        $sql = "UPDATE usuario SET estado = 0 WHERE id = ?";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);
         $resultado->execute([$this->id]); 
         return $resultado->fetchAll();
     }
+
+
 }

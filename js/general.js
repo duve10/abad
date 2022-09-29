@@ -42,7 +42,7 @@ function tableGeneral(idTable) {
     },
   });
 
-  table.buttons().container().appendTo("#example_wrapper .col-md-6:eq(0)");
+  table.buttons().container().appendTo("#"+idTable+"_wrapper .col-md-6:eq(0)");
 }
 
 /**FETCH DATA */

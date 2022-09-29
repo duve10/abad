@@ -7,7 +7,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form  id="formAddUser" method="POST" action="">
+                <form id="formAddUser" method="POST">
+                <!-- <div class="mb-3 row">
+                     
+                        <div class="col-sm-10">
+                        <img src="img/empresa/logo.png" alt="..." class="img-thumbnail">
+                        </div>
+                    </div> -->
+               
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label">Usuario</label>
                         <div class="col-sm-10">
@@ -45,7 +52,7 @@
                                 <option value="1">D.N.I</option>
                                 <option value="2">R.U.C.</option>
                             </select>
-                            
+
                         </div>
                         <label class="col-sm-2 col-form-label">Documento</label>
                         <div class="col-sm-4">
@@ -53,22 +60,29 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        
+
                     </div>
                     <div class="mb-3 row">
                         <label class="col-sm-2 col-form-label">Rol</label>
                         <div class="col-sm-10">
-                        <select class="form-select" name="idrol" id="idrol" aria-label="Default select example">
+                            <select class="form-select" name="idrol" id="idrol" aria-label="Default select example">
                                 <option value="1">Administrador</option>
                                 <option value="2">Auditor</option>
                             </select>
                         </div>
                     </div>
-                   
+
+                    <div class="mb-3 row">
+                        <label for="fotoUser" class="col-sm-2 col-form-label">Foto</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="file" id="fotoUser" name="fotoUser">
+                        </div>
+                    </div>
+
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="submit" name="add" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="submit" name="add" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span>Guardar</a>
                     </form>
             </div>
         </div>
