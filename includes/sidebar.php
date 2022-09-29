@@ -1,4 +1,3 @@
-
 <nav id="sidebar" class="sidebar js-sidebar">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="index">
@@ -33,7 +32,7 @@
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                     </svg> <span class="align-middle">Maestros</span>
                 </a>
-                <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar" style="">
+                <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-in.html">Tipos</a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Tipos 2</a></li>
                 </ul>
