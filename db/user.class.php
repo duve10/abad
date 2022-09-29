@@ -180,7 +180,7 @@ class User
     }
 
     public function getUsuarios() {
-        $sql = "SELECT u.id,u.nombre_usuario,u.nombres,u.apellido_paterno,u.apellido_materno,u.foto,r.descripcion  FROM usuario as u left join rol as r on u.idrol = r.id where u.estado = 1 ORDER BY u.ID DESC";
+        $sql = "SELECT u.id,u.nombre_usuario,u.nombres,u.apellido_paterno,u.apellido_materno,u.foto,r.descripcion  FROM usuario as u left join rol as r on u.idrol = r.id where u.estado = 1 and u.idrol!= 3  ORDER BY u.ID DESC";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);
