@@ -28,14 +28,15 @@ include "includes/header.php";
         <main class="content">
             <div class="container-fluid p-0">
                 <h1>Empresas</h1>
-                <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addUser">Agregar Empresas</button>
+                <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addEmpresa">Agregar Empresas</button>
                 <table id="tableEmpresas" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
-                            <th>U.Creador</th>
+                            <th>Logo</th>
                             <th>Nombre Empresa</th>
                             <th>Tipo Doc.</th>
                             <th>Documento</th>
+                            <th>U.Creador</th>
                             <th class="text-center">Acciones</th>
 
                         </tr>
@@ -43,25 +44,29 @@ include "includes/header.php";
                     <tbody>
                         <?php foreach ($empresas as $empresa) : ?>
                             <tr>
-                                <td><?= $empresa["nombre_usuario"]; ?></td>
-                                <td><?= $empresa["empresa"]; ?></td>
+                                <td> <img src="img/logos/<?= $empresa["logo"] != '' ? $empresa["logo"] : "empresa_default.jpg"; ?>" width="48" height="48" class="rounded-circle me-2" alt="Avatar"></td>
+                                <td><?= $empresa["razon_social"] . ' ' . $empresa["empresa"] . ' ' . $empresa["apellido_paterno"] . ' ' . $empresa["apellido_materno"]; ?></td>
                                 <td><?= $empresa["tipo_doc"]; ?></td>
                                 <td><?= $empresa["numero_doc"]; ?></td>
-                                <td class="td_acciones">
+                                <td><?= $empresa["nombre_usuario"]; ?></td>
+                                <td>
+                                    <div class="td_acciones">
+                                        <a class="a-editar" href="#">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit align-middle me-2">
+                                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                                            </svg>
+                                        </a>
 
-                                    <a class="a-editar" href="#">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit align-middle me-2">
-                                            <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-                                            <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
-                                        </svg>
-                                    </a>
+                                        <a class="a-eliminar" id="<?= $empresa["id"]; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-x align-middle me-2">
+                                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="8.5" cy="7" r="4"></circle>
+                                                <line x1="18" y1="8" x2="23" y2="13"></line>
+                                                <line x1="23" y1="8" x2="18" y2="13"></line>
+                                            </svg>
+                                        </a>
 
-                                    <a class="a-eliminar" id="<?= $user["id"]; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user-x align-middle me-2">
-                                            <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                            <circle cx="8.5" cy="7" r="4"></circle>
-                                            <line x1="18" y1="8" x2="23" y2="13"></line>
-                                            <line x1="23" y1="8" x2="18" y2="13"></line>
-                                        </svg></a>
+                                    </div>
 
 
                                 </td>

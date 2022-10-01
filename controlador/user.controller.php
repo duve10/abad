@@ -29,15 +29,19 @@ $userClass->setIdDocumento(escaparDatos($id_documento));
 $userClass->setIdRol(escaparDatos($idrol));
 
 /**VALIDACION PARA IMAGENES */
-if(!is_dir($carpetaImagenUser)) {
-    mkdir($carpetaImagenUser);
-}
-// generando nombre unico
-$fotoNombre = md5(uniqid(rand(), true)).".jpg";
+$fotoNombre = '';
+if ($foto["name"] != '') {
+    if (!is_dir($carpetaImagenUser)) {
+        mkdir($carpetaImagenUser);
+    }
+    // generando nombre unico
+    $fotoNombre = md5(uniqid(rand(), true)) . ".jpg";
 
-if($foto != '') {
-    move_uploaded_file($foto["tmp_name"], $carpetaImagenUser . $fotoNombre);
+    if ($foto != '') {
+        move_uploaded_file($foto["tmp_name"], $carpetaImagenUser . $fotoNombre);
+    }
 }
+
 $userClass->setFoto($fotoNombre);
 
 
