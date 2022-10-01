@@ -130,4 +130,3 @@ async function editarUsuario(id, url) {
     }
   });
 }
-

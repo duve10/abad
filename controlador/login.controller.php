@@ -10,8 +10,6 @@ function verifyUser($nombre_usuario,$password) {
     $loginClass->setPassword($password);
  
     return $loginClass->getUsuario();
-
-
 }
 
 
