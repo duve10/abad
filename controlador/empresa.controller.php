@@ -46,7 +46,7 @@ if (isset($_SESSION["login"])) {
     if ($logo["name"] != '') {
         if (!is_dir($carpetaImagenEmpresa)) {
             mkdir($carpetaImagenEmpresa);
-        }
+        } 
         // generando nombre unico
         $logoNombre = md5(uniqid(rand(), true)) . ".jpg";
 
@@ -55,7 +55,7 @@ if (isset($_SESSION["login"])) {
         }
     }
 
-
+    
     $userEmpresa->setLogo($logoNombre);
 
 
