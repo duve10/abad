@@ -21,7 +21,16 @@ function agregarUsuario() {
         body: datos,
       });
 
-      let data = await response.text();
+      let data = await response.json();
+
+      if (data.error) {
+        Swal.fire({
+          icon: "error",
+          text: data.mensaje,
+        });
+
+        return;
+      }
 
       location.replace("usuarios");
     } catch (error) {

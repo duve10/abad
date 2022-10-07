@@ -19,7 +19,7 @@ if (!$auth) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link rel="shortcut icon" href="img/empresa/logocorto.png" />
+    <link rel="shortcut icon" href="<?= URL ?>/img/empresa/logocorto.png" />
     <title><?= $titulo; ?></title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.2.0/css/bootstrap.min.css">
@@ -28,8 +28,8 @@ if (!$auth) {
 
 
 
-    <link href="css/app.css" rel="stylesheet" />
-    <link href="css/app2.css" rel="stylesheet" />
+    <link href="<?= URL ?>/css/app.css" rel="stylesheet" />
+    <link href="<?= URL ?>/css/app2.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
 </head>
 

@@ -15,10 +15,11 @@ class Empresa
     private $id_documento;
     private $id_usuario_creador;
     private $logo;
+    private $logo_nombre;
 
 
 
-    public function __construct($id = 0, $razon_social = '', $nombre = '', $apellido_paterno = '', $apellido_materno = '', $direccion = '', $telefono = '', $documento = '', $id_documento = '', $id_usuario_creador = '', $logo = '')
+    public function __construct($id = 0, $razon_social = '', $nombre = '', $apellido_paterno = '', $apellido_materno = '', $direccion = '', $telefono = '', $documento = '', $id_documento = '', $id_usuario_creador = '', $logo = '', $logo_nombre = '')
     {
         $this->id = $id;
         $this->razon_social = $razon_social;
@@ -31,6 +32,7 @@ class Empresa
         $this->id_documento = $id_documento;
         $this->id_usuario_creador = $id_usuario_creador;
         $this->logo = $logo;
+        $this->logo_nombre = $logo_nombre;
     }
 
 
@@ -46,7 +48,7 @@ class Empresa
         return $this;
     }
 
-    
+
     public function getRazon_social()
     {
         return $this->razon_social;
@@ -168,24 +170,42 @@ class Empresa
         return $this;
     }
 
+    public function getLogo_nombre()
+    {
+        return $this->logo_nombre;
+    }
+
+    public function setLogo_nombre($logo_nombre)
+    {
+        $this->logo_nombre = $logo_nombre;
+
+        return $this;
+    }
+
     public function insertEmpresa()
     {
         try {
-            $sql = "INSERT INTO EMPRESA(razon_social,nombre,apellido_paterno,apellido_materno,direccion,telefono,documento,id_documento,id_usuario_creador, logo) VALUES (?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO empresa (razon_social,nombre,apellido_paterno,apellido_materno,direccion,telefono,documento,id_documento,id_usuario_creador, logo,logo_nombre,estado,fecha_creacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,1,now())";
             $objeto = new Conexion();
             $conexion = $objeto->Conectar();
             $resultado = $conexion->prepare($sql);
-            $resultado->execute([$this->razon_social,$this->nombre,$this->apellido_paterno,$this->apellido_materno,$this->direccion,$this->telefono, $this->documento, $this->id_documento, $this->id_usuario_creador, $this->logo]);
+            $resultado->execute([$this->razon_social, $this->nombre, $this->apellido_paterno, $this->apellido_materno, $this->direccion, $this->telefono, $this->documento, $this->id_documento, $this->id_usuario_creador, $this->logo, $this->logo_nombre]);
         } catch (Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function getEmpresas()
+    public function getEmpresas($idUser, $idRol)
     {
+        $where = '';
+        if ($idRol == '2') {
+            $where = ' where e.id_usuario_creador =' . $idUser;
+        }
         $sql = "SELECT e.id,e.nombre as empresa,e.documento as numero_doc,u.nombre_usuario,d.descripcion as tipo_doc,e.razon_social,e.apellido_paterno,e.apellido_materno,e.direccion,e.telefono,e.logo FROM empresa as e 
         left join usuario as u on u.id = e.id_usuario_creador
-        left join documento as d on d.id=e.id_documento ORDER BY e.ID DESC";
+        left join documento as d on d.id=e.id_documento 
+        $where 
+        ORDER BY e.ID DESC";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);
@@ -205,22 +225,20 @@ class Empresa
 
     public function updateEmpresa()
     {
-        $sql = "UPDATE  empresa SET nombre = ?,documento = ?,id_documento = ? WHERE id = ?";
+        $sql = "UPDATE  empresa SET  razon_social = ?,nombre = ?,apellido_paterno = ?,apellido_materno = ?,direccion = ?,telefono = ?,logo = ?,logo_nombre = ?,documento = ?,id_documento = ? WHERE id = ?";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);
-        $resultado->execute([$this->nombre, $this->documento, $this->id_documento, $this->id]);
+        $resultado->execute([$this->razon_social, $this->nombre, $this->apellido_paterno, $this->apellido_materno, $this->direccion, $this->telefono, $this->logo, $this->logo_nombre, $this->documento, $this->id_documento, $this->id]);
     }
 
     public function deleteEmpresa()
     {
-        $sql = "DELETE FROM empresa WHERE id = ?";
+        $sql = "UPDATE empresa SET estado = 0 WHERE id = ?";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);
         $resultado->execute([$this->id]);
         return $resultado->fetchAll();
     }
-
-
 }

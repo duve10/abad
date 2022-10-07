@@ -57,7 +57,7 @@
                         </div>
                     </div>
                     <div class="mb-3 row">
-                        <label class="col-sm-2 col-form-label">Teléfoni</label>
+                        <label class="col-sm-2 col-form-label">Teléfono</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" name="telefono" id="telefono" autocomplete="off">
                         </div>
@@ -69,13 +69,13 @@
                             <input class="form-control" type="file" id="logo" name="logo">
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="submit" name="add" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span>Guardar</a>
+                    </div>
+                </form>
+            </div>
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="submit" name="add" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span>Guardar</a>
-                    </form>
-            </div>
         </div>
     </div>
 </div>
