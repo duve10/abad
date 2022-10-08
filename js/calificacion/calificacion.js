@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
   cleanModalClosed("editCalificacion");
   agregarCalificacion();
   agregarClaseEliminar();
-  // obtenerEmpresa();
-  // editarEmpresa();
+  obtenerCalificacion();
+  editarCalificacion();
 });
 
 function agregarCalificacion() {
@@ -83,4 +83,67 @@ async function eliminarCalificacion(id, url) {
   } catch (e) {
     console.log(e);
   }
+}
+
+
+async function obtenerCalificacion() {
+  let idCalificacion = document.getElementById("idCalificacion");
+  let descripcion = document.getElementById("descripcion_edit");
+
+  $(".a-editar").click(async function () {
+    let idCalificacionEdit = this.dataset.id;
+
+    try {
+      let datosView = new FormData();
+      datosView.append("consultar", "1");
+      datosView.append("idCalificacion", idCalificacionEdit);
+      let response = await fetch("controlador/calificacion.controller.php", {
+        method: "POST",
+        body: datosView,
+      });
+      let data = await response.json();
+      idCalificacion.value = data.id;
+      descripcion.value = data.descripcion;
+    } catch (e) {
+      console.log(e);
+    }
+  });
+}
+
+
+async function editarCalificacion() {
+  const formEditCalificacion = document.querySelector("#formEditCalificacion");
+
+  formEditCalificacion.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    let datosEdit = new FormData(formEditCalificacion);
+    datosEdit.append("edit", "1");
+
+    try {
+      let response = await fetch("controlador/calificacion.controller.php", {
+        method: "POST",
+        body: datosEdit,
+      });
+
+      let data = await response.json();
+
+      if (data.error) {
+        Swal.fire({
+          icon: "error",
+          text: data.mensaje,
+        });
+
+        return;
+      }
+
+      Swal.fire("Calificacion Actualizada!", "", "success").then((result) => {
+        if (result.isConfirmed) {
+          location.replace("calificacion");
+        }
+      });
+    } catch (error) {
+      console.log(e);
+    }
+  });
 }

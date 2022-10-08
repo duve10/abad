@@ -33,7 +33,7 @@ if (isset($_SESSION["login"])) {
     }
 
     /**VALIDAMOS RUC */
-    if (!isset($_POST["edit"])) {
+    if (isset($_POST["save"])) {
         $existeDecripcion = existeDato("calificacion", "descripcion", trim($descripcion));
         if ($existeDecripcion > 0) {
             $respuesta["error"] = true;
@@ -44,6 +44,18 @@ if (isset($_SESSION["login"])) {
         }
     }
 
+        /**VALIDAMOS RUC */
+        if (isset($_POST["edit"])) {
+            $existeDecripcion = existeDatoUpdate("calificacion", "descripcion", trim($descripcion),$idCalificacion);
+            if ($existeDecripcion > 0) {
+                $respuesta["error"] = true;
+                $respuesta["mensaje"] = "Descripcion ya existe";
+    
+                echo json_encode($respuesta);
+                die;
+            }
+        }
+    
 
     if (isset($_POST["save"])) {
 
