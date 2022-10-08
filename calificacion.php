@@ -54,7 +54,7 @@ include "includes/header.php";
                         <?php foreach ($calificaciones as $calificacion) : ?>
                             <tr>
                                 <td><?= $calificacion["contador"]; ?></td>
-                                <td><a href="<?= URL.'/calificacion/'.$calificacion["id"].'/'.str_replace(" ","-",$calificacion["descripcion"]); ?>"><?= $calificacion["descripcion"]; ?></a> </td>
+                                <td><?= $calificacion["descripcion"]; ?> </td>
                                 <td>
                                     <div class="td_acciones ">
                                         <a class="a-editar" data-id="<?= $calificacion["id"];  ?>" data-bs-toggle="modal" data-bs-target="#editCalificacion">

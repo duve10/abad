@@ -53,7 +53,7 @@ function agregarClaseEliminar() {
       if (result.isConfirmed) {
         eliminarCalificacion(idCalificacion, "controlador/calificacion.controller.php");
       } else if (result.isDenied) {
-        Swal.fire("Empreas no Eliminada", "", "info");
+        Swal.fire("Calificación no Eliminada", "", "info");
       }
     });
   });
@@ -74,7 +74,7 @@ async function eliminarCalificacion(id, url) {
     if (data.error) {
       return;
     } else {
-      Swal.fire("Empresa Eliminada!", "", "success").then((result) => {
+      Swal.fire("Calificaciòn Eliminada!", "", "success").then((result) => {
         if (result.isConfirmed) {
           location.replace("calificacion");
         }
