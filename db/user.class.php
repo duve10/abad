@@ -180,7 +180,7 @@ class User
     public function insertUsuario()
     {
         try {
-            $sql = "INSERT INTO USUARIO(nombre_usuario,password,nombres,apellido_paterno,apellido_materno,direccion,telefono,id_documento,documento,idrol, foto, estado, fecha_creacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,1, now())";
+            $sql = "INSERT INTO usuario(nombre_usuario,password,nombres,apellido_paterno,apellido_materno,direccion,telefono,id_documento,documento,idrol, foto, estado, fecha_creacion) VALUES (?,?,?,?,?,?,?,?,?,?,?,1, now())";
             $objeto = new Conexion();
             $conexion = $objeto->Conectar();
             $resultado = $conexion->prepare($sql);
@@ -212,7 +212,7 @@ class User
     }
 
     public function updateUser() {
-        $sql = "UPDATE  USUARIO SET password = ?,nombres = ?,apellido_paterno = ?,apellido_materno = ?,direccion = ?,telefono = ?,documento = ?,id_documento=?, idrol=? WHERE id = ?";
+        $sql = "UPDATE  usuario SET password = ?,nombres = ?,apellido_paterno = ?,apellido_materno = ?,direccion = ?,telefono = ?,documento = ?,id_documento=?, idrol=? WHERE id = ?";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);

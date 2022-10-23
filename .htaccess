@@ -2,6 +2,8 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php
+RewriteRule ^propiedad/([0-9]+)/([0-9a-zA-Z_-]+)/([0-9]+)/([0-9a-zA-Z_-]+)/([0-9]+) propiedad.php?idPropiedad=$1&descripcion=$2&idProceso=$3&descripcionPro=$4&idCiclo=$5
+RewriteRule ^propiedad/([0-9]+)/([0-9a-zA-Z_-]+)/([0-9]+)/([0-9a-zA-Z_-]+) propiedad.php?idPropiedad=$1&descripcion=$2&idProceso=$3&descripcionPro=$4
 RewriteRule ^propiedad/([0-9]+)/([0-9a-zA-Z_-]+) propiedad.php?idPropiedad=$1&descripcion=$2
 RewriteRule ^propiedad/([0-9]+) propiedad.php?idPropiedad=$1
 

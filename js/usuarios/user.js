@@ -31,6 +31,7 @@ function agregarUsuario() {
 
         return;
       }
+      
 
       location.replace("usuarios");
     } catch (error) {

@@ -2,20 +2,18 @@
 
 require_once("Conexion.php");
 
-class Proceso
+class Auditoria
 {
     private $id;
-    private $descripcion;
+    private $id_empresa;
     private $id_usuario_creador;
-    private $id_propiedad;
 
 
-    public function __construct($id = 0, $descripcion = '', $id_usuario_creador = '', $id_propiedad = '')
+    public function __construct($id = 0, $id_empresa = '', $id_usuario_creador = '')
     {
         $this->id = $id;
-        $this->descripcion = $descripcion;
+        $this->id_empresa = $id_empresa;
         $this->id_usuario_creador = $id_usuario_creador;
-        $this->id_propiedad = $id_propiedad;
     }
 
 
@@ -32,14 +30,14 @@ class Proceso
     }
 
 
-    public function getDescripcion()
+    public function getId_empresa()
     {
-        return $this->descripcion;
+        return $this->id_empresa;
     }
 
-    public function setDescripcion($descripcion)
+    public function setId_empresa($id_empresa)
     {
-        $this->descripcion = $descripcion;
+        $this->id_empresa = $id_empresa;
 
         return $this;
     }
@@ -56,44 +54,31 @@ class Proceso
         return $this;
     }
 
-    public function getId_propiedad()
-    {
-        return $this->id_propiedad;
-    }
-
-    public function setId_propiedad($id_propiedad)
-    {
-        $this->id_propiedad = $id_propiedad;
-
-        return $this;
-    }
-
-
-    public function insertProceso()
+    public function insertAuditoria()
     {
         try {
-            $sql = "INSERT INTO proceso (descripcion,id_usuario_creador,fecha_creacion,estado,id_propiedad) VALUES (?,?,now(),1,?)";
+            $sql = "INSERT INTO auditoria (id_empresa,id_usuario_creador,fecha_creacion,estado) VALUES (?,?,now(),1)";
             $objeto = new Conexion();
             $conexion = $objeto->Conectar();
             $resultado = $conexion->prepare($sql);
-            $resultado->execute([$this->descripcion, $this->id_usuario_creador, $this->id_propiedad]);
-            return ["idPropiedad" => $this->id_propiedad, "descripcion" => $this->descripcion];
+            $resultado->execute([$this->id_empresa, $this->id_usuario_creador]);
         } catch (Exception $e) {
             return $e->getMessage();
         }
     }
 
-    public function getProcesos($idUser, $idRol, $id_propiedad)
+    public function getAuditorias($idUser, $idRol)
     {
         $where = '';
         if ($idRol == '2') {
             $where = ' and n.id_usuario_creador =' . $idUser;
         }
-        $sql = "SELECT  @i := @i + 1 as contador,n.id,n.descripcion,u.nombre_usuario,n.id_propiedad FROM proceso as n
+        $sql = "SELECT  @i := @i + 1 as contador,n.id,n.id_empresa,u.nombre_usuario,e.razon_social,e.nombre,e.apellido_paterno,e.apellido_materno FROM auditoria as n
         cross join (select @i := 0) r
         left join usuario as u on u.id = n.id_usuario_creador
-        where n.estado=1 and n.id_propiedad=$id_propiedad $where 
-        ORDER BY n.descripcion";
+        left join empresa as e on e.id = n.id_empresa
+        where n.estado=1 $where 
+        ORDER BY n.id desc";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);
@@ -101,9 +86,9 @@ class Proceso
         return $resultado->fetchAll();
     }
 
-    public function getProceso()
+    public function getAuditoria()
     {
-        $sql = "SELECT * FROM proceso where id = ?";
+        $sql = "SELECT * FROM auditoria where id = ?";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);
@@ -111,18 +96,18 @@ class Proceso
         return json_encode(($resultado->fetch(PDO::FETCH_ASSOC)));
     }
 
-    public function updateProceso()
+    public function updateAuditoria3()
     {
-        $sql = "UPDATE  proceso SET  descripcion=? WHERE id = ?";
+        $sql = "UPDATE  calificacion SET  descripcion=? WHERE id = ?";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);
         $resultado->execute([$this->descripcion, $this->id]);
     }
 
-    public function deleteProceso()
+    public function deleteCalificacion()
     {
-        $sql = "UPDATE proceso SET estado = 0 WHERE id = ?";
+        $sql = "UPDATE calificacion SET estado = 0 WHERE id = ?";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);

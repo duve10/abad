@@ -4,7 +4,7 @@ session_start();
 
 if (isset($_SESSION["login"])) {
 
-    require_once "../db/proceso.class.php";
+    require_once "../db/ciclo.class.php";
     require_once("../db/Conexion.php");
     require "funciones.php";
 
@@ -14,16 +14,16 @@ if (isset($_SESSION["login"])) {
     ];
 
 
-    $idProceso = isset($_POST["idProceso"]) ? $_POST["idProceso"] : "";
+    $idCiclo = isset($_POST["idCiclo"]) ? $_POST["idCiclo"] : "";
     $descripcion = isset($_POST["descripcion"]) ? $_POST["descripcion"] : "";
     $id_usuario_creador = isset($_SESSION["id_usuario"]) ? $_SESSION["id_usuario"] : "";
-    $idPropiedad = isset($_POST["idPropiedad"]) ? $_POST["idPropiedad"] : "";
+    $idProceso = isset($_POST["idProceso"]) ? $_POST["idProceso"] : "";
 
-    $procesoClass = new Proceso();
-    $procesoClass->setId(escaparDatos($idProceso));
-    $procesoClass->setDescripcion(escaparDatos(trim($descripcion)));
-    $procesoClass->setId_usuario_creador($id_usuario_creador);
-    $procesoClass->setId_propiedad($idPropiedad);
+    $cicloClass = new Ciclo();
+    $cicloClass->setId(escaparDatos($idProceso));
+    $cicloClass->setDescripcion(escaparDatos(trim($descripcion)));
+    $cicloClass->setId_usuario_creador($id_usuario_creador);
+    $cicloClass->setId_proceso($idProceso);
 
 
 
@@ -38,7 +38,7 @@ if (isset($_SESSION["login"])) {
 
     /**VALIDAMOS RUC */
     if (isset($_POST["save"])) {
-        $existeDecripcion = existeDato("proceso", "descripcion", trim($descripcion), "id_propiedad", $idPropiedad );
+        $existeDecripcion = existeDato("ciclo", "descripcion", trim($descripcion), "id_proceso", $idProceso );
         if ($existeDecripcion > 0) {
             $respuesta["error"] = true;
             $respuesta["mensaje"] = "Descripcion ya existe";
@@ -50,7 +50,7 @@ if (isset($_SESSION["login"])) {
 
         /**VALIDAMOS RUC */
         if (isset($_POST["edit"])) {
-            $existeDecripcion = existeDatoUpdatePorTabla("propiedad", "descripcion", trim($descripcion),$idProceso, "id_propiedad", $idPropiedad);
+            $existeDecripcion = existeDatoUpdatePorTabla("ciclo", "descripcion", trim($descripcion),$idCiclo, "id_proceso", $idProceso);
             if ($existeDecripcion > 0) {
                 $respuesta["error"] = true;
                 $respuesta["mensaje"] = "Descripcion ya existe";
@@ -63,25 +63,25 @@ if (isset($_SESSION["login"])) {
 
     if (isset($_POST["save"])) {
 
-        $respuesta["dato"] = $procesoClass->insertProceso();
+        $respuesta["dato"] = $cicloClass->insertCiclo();
         $respuesta["mensaje"] = "Guardado Correctamente";
         echo json_encode($respuesta);
     }
 
     if (isset($_POST["edit"])) {
 
-        $procesoClass->updateProceso();
+        $cicloClass->updateCiclo();
         $respuesta["mensaje"] = "Editado Correctamente";
         echo json_encode($respuesta);
     }
 
     if (isset($_POST["delete"])) {
-        $procesoClass->deleteProceso();
+        $cicloClass->deleteCiclo();
         echo json_encode($respuesta);
     }
 
     if (isset($_POST["consultar"])) {
-        $jsonEmpresa = $procesoClass->getProceso();
+        $jsonEmpresa = $cicloClass->getCiclo();
         echo $jsonEmpresa;
     }
 } else {

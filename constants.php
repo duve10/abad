@@ -8,5 +8,4 @@
     $active_maestros = "";
     $active_calificacion = "";
     $active_propiedad = "";
-    $active_auditoria = "";
 ?>

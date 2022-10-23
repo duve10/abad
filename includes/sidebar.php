@@ -39,12 +39,12 @@
                 </ul>
             </li>
 
-            <li class="sidebar-header">Formularios</li>
+            <li class="sidebar-header">Auditoria</li>
 
-            <li class="sidebar-item">
-                <a class="sidebar-link" href="ui-buttons.html">
+            <li class="sidebar-item <?php echo $active_auditoria; ?>">
+                <a class="sidebar-link" href="auditoria">
                     <i class="align-middle" data-feather="square"></i>
-                    <span class="align-middle">Formulario 1</span>
+                    <span class="align-middle">Auditorias</span>
                 </a>
             </li>
 
