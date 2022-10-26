@@ -1,6 +1,7 @@
 <?php
 require_once 'config/constants.php';
-require_once 'controlador/auditoria.function.php';
+require_once 'controlador/auditoriaDetalle.function.php';
+require_once 'controlador/funciones.php';
 
 // Procedimientos
 if (session_status() === PHP_SESSION_NONE) {
@@ -13,16 +14,18 @@ if ($_SESSION["idrol"] == '2') {
 
 
 //TITULO DE PAGINA
-$titulo = "Auditorias";
+$titulo = "Auditorias Detalle";
 //ACTIVAR SIDEBAR MODULO
 $active_auditoria = "active";
 
-
+$idempresa = $_GET["idempresa"];
 
 //OBTENER LOS USUARIOS
-$auditorias = getAuditorias($_SESSION["id_usuario"], $_SESSION["idrol"]);
+$auditoriaDetalles = getAuditoriaDetalles($_SESSION["id_usuario"], $_SESSION["idrol"], $idempresa);
 
-
+$empresa = '';
+$empresa = extraeDatos('razon_social,id,nombre,apellido_paterno,apellido_materno','empresa','id',$idempresa);
+$nombre_empresa = $empresa["razon_social"].' '.$empresa["nombre"]. ' '.$empresa["apellido_paterno"].' '.$empresa["apellido_materno"];
 ?>
 
 
@@ -37,8 +40,8 @@ include "includes/header.php";
 
         <main class="content">
             <div class="container-fluid p-0">
-                <h1>Auditorias</h1>
-                <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addAuditoria">Agregar Auditoria</button>
+                <h1>Detalle Auditorias de <?= $nombre_empresa ?></h1>
+                <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addCalificacion">Agregar Detalle</button>
                 <table id="tableAuditoria" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
@@ -52,7 +55,7 @@ include "includes/header.php";
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($auditorias as $auditoria) : ?>
+                        <?php foreach ($auditoriaDetalles as $auditoriaDetalle) : ?>
                             <tr>
                                 <td><?= $auditoria["contador"]; ?></td>
                                 <td><?= $auditoria["documento"]; ?> </td>
@@ -60,7 +63,7 @@ include "includes/header.php";
                                 <td><?= $auditoria["nombre_usuario"]; ?> </td>
                                 <td>
                                     <div class="td_acciones ">
-                                        <a class="a-auditoria" href="auditoria_detalle/<?= $auditoria["id_empresa"];  ?>"  data-id="<?= $auditoria["id"];  ?>" >
+                                        <a class="a-auditoria" href="auditoria_detalle/<?= $auditoria["id"];  ?>" data-id="<?= $auditoria["id"];  ?>">
                                             <i class="align-middle" data-feather="layers"></i>
                                         </a>
 

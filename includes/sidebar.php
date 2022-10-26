@@ -42,8 +42,8 @@
             <li class="sidebar-header">Auditoria</li>
 
             <li class="sidebar-item <?php echo $active_auditoria; ?>">
-                <a class="sidebar-link" href="auditoria">
-                    <i class="align-middle" data-feather="square"></i>
+                <a class="sidebar-link" href="<?= URL ?>/auditoria">
+                    <i class="align-middle" data-feather="shield"></i>
                     <span class="align-middle">Auditorias</span>
                 </a>
             </li>

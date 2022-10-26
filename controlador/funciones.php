@@ -48,6 +48,18 @@ function extraeDato($columna, $tabla, $id, $idDato)
    return ($resultado->fetchColumn());
 }
 
+function extraeDatos($columna, $tabla, $id, $idDato)
+{
+   $sql = "SELECT $columna FROM $tabla where $id = $idDato";
+   $objeto = new Conexion();
+
+   $conexion = $objeto->Conectar();
+   $resultado = $conexion->prepare($sql);
+   $resultado->execute();
+   return ($resultado->fetch(PDO::FETCH_ASSOC));
+}
+
+
 
 function existeDatoPorTabla($tabla, $dato, $user, $id, $id2)
 {

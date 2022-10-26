@@ -73,7 +73,8 @@ class Auditoria
         if ($idRol == '2') {
             $where = ' and n.id_usuario_creador =' . $idUser;
         }
-        $sql = "SELECT  @i := @i + 1 as contador,n.id,n.id_empresa,u.nombre_usuario,e.razon_social,e.nombre,e.apellido_paterno,e.apellido_materno FROM auditoria as n
+        $sql = "SELECT  @i := @i + 1 as contador,n.id,n.id_empresa,u.nombre_usuario,e.razon_social,e.nombre,e.apellido_paterno,e.apellido_materno,e.documento
+                 FROM auditoria as n
         cross join (select @i := 0) r
         left join usuario as u on u.id = n.id_usuario_creador
         left join empresa as e on e.id = n.id_empresa
@@ -96,18 +97,18 @@ class Auditoria
         return json_encode(($resultado->fetch(PDO::FETCH_ASSOC)));
     }
 
-    public function updateAuditoria3()
+    public function updateAuditoria()
     {
-        $sql = "UPDATE  calificacion SET  descripcion=? WHERE id = ?";
+        $sql = "UPDATE  auditoria SET  descripcion=? WHERE id = ?";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);
         $resultado->execute([$this->descripcion, $this->id]);
     }
 
-    public function deleteCalificacion()
+    public function deleteAuditoria()
     {
-        $sql = "UPDATE calificacion SET estado = 0 WHERE id = ?";
+        $sql = "UPDATE auditoria SET estado = 0 WHERE id = ?";
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);

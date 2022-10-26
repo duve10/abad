@@ -65,6 +65,10 @@
   color: #ffc107;
 }
 
+.a-auditoria {
+  color: #1cbb8c;
+}
+
 /** VALIDACION */
 .boder-invalid {
   border-color: #dc3545;
@@ -79,3 +83,14 @@
 }
 
 
+.autocomplete-items div {
+  border: 1px solid #ced4da;
+}
+.autocomplete-items div {
+  padding: 5px;
+  border-bottom: 1px solid #ced4da;
+}
+.autocomplete-items div:hover {
+  background-color: #326abc;
+  color: #fff;
+}

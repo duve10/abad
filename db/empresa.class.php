@@ -241,4 +241,30 @@ class Empresa
         $resultado->execute([$this->id]);
         return $resultado->fetchAll();
     }
+
+    public function getEmpresaByName($name)
+    {
+        $sql = "SELECT *
+        FROM auditoria as t1
+        RIGHT  JOIN empresa as t2  ON t2.id = t1.id_empresa 
+        where t1.id_empresa is null and (t2.razon_social LIKE  '%$name%' or t2.nombre like  '%$name%') LIMIT 3";
+        $objeto = new Conexion();
+        $conexion = $objeto->Conectar();
+        $resultado = $conexion->prepare($sql);
+        $resultado->execute([$this->id]);
+        return json_encode(($resultado->fetchAll(PDO::FETCH_ASSOC)));
+    }
+
+    public function getEmpresaByDocument($doc)
+    {
+        $sql = "SELECT *
+        FROM auditoria as t1
+        RIGHT  JOIN empresa as t2  ON t2.id = t1.id_empresa 
+        where t1.id_empresa is null and t2.documento LIKE  '%$doc%' LIMIT 3";
+        $objeto = new Conexion();
+        $conexion = $objeto->Conectar();
+        $resultado = $conexion->prepare($sql);
+        $resultado->execute([$this->id]);
+        return json_encode(($resultado->fetchAll(PDO::FETCH_ASSOC)));
+    }
 }
