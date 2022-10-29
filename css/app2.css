@@ -34,6 +34,18 @@
   font-weight: 400;
   padding: 0.625rem 1.5rem 0.625rem 3.25rem;
 }
+.sidebar-item.active .sidebar-link:hover, .sidebar-item.active>.sidebar-link {
+  background: linear-gradient(90deg,rgba(59,125,221,.1),rgba(59,125,221,.088) 50%,transparent);
+    border-left-color: #3b7ddd;
+    color: #e9ecef;
+}
+
+.sidebar-dropdown .sidebar-item.active .sidebar-link {
+  background: transparent;
+  border-left: 0;
+  color: #518be1;
+  font-weight: 400;
+}
 
 .logoDash {
   width: 100%;
@@ -53,6 +65,10 @@
   color: #ffc107;
 }
 
+.a-auditoria {
+  color: #1cbb8c;
+}
+
 /** VALIDACION */
 .boder-invalid {
   border-color: #dc3545;
@@ -64,4 +80,22 @@
 
 .displayBlock {
   display: block;
+}
+
+
+.autocomplete-items div {
+  border: 1px solid #ced4da;
+}
+.autocomplete-items div {
+  padding: 5px;
+  border-bottom: 1px solid #ced4da;
+}
+.autocomplete-items div:hover {
+  background-color: #326abc;
+  color: #fff;
+}
+
+.separador {
+  border-bottom: 1px dotted #ced4da;
+  padding-bottom: 5px;
 }

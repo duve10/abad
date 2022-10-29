@@ -1,10 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
   tableGeneral("tableEmpresas");
   cleanModalClosed("addEmpresa");
-  // cleanModalClosed("editUser");
+  cleanModalClosed("editEmpresa");
   agregarEmpresa();
-  // agregarClaseEliminar();
-  // ObtenerUsuario();
+  agregarClaseEliminar();
+
+  obtenerEmpresa();
+  editarEmpresa();
 });
 
 function agregarEmpresa() {
@@ -21,7 +23,16 @@ function agregarEmpresa() {
         body: datos,
       });
 
-      let data = await response.text();
+      let data = await response.json();
+
+      if (data.error) {
+        Swal.fire({
+          icon: "error",
+          text: data.mensaje,
+        });
+
+        return;
+      }
 
       location.replace("empresas");
     } catch (error) {
@@ -32,97 +43,109 @@ function agregarEmpresa() {
 
 function agregarClaseEliminar() {
   $(".a-eliminar").click(function () {
-    let idUser = this.id;
+    let idEmpresa = this.id;
     Swal.fire({
-      title: "¿Seguro que quiere eliminar al Usuario?",
+      title: "¿Seguro que quiere eliminar la Empresa?",
       showDenyButton: true,
       confirmButtonText: "Eliminar",
       denyButtonText: `No Eliminar`,
     }).then((result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        eliminarUsuario(idUser, "controlador/user.controller.php");
+        eliminarEmpresa(idEmpresa, "controlador/empresa.controller.php");
       } else if (result.isDenied) {
-        Swal.fire("Usuario no Elimado", "", "info");
+        Swal.fire("Empreas no Eliminada", "", "info");
       }
     });
   });
 }
 
-async function eliminarUsuario(id, url) {
+async function eliminarEmpresa(id, url) {
   try {
     let datos = new FormData();
     datos.append("delete", "1");
-    datos.append("idUsuario", id);
+    datos.append("idEmpresa", id);
     let response = await fetch(url, {
       method: "POST",
       body: datos,
     });
-    Swal.fire("Usuario Eliminado!", "", "success").then((result) => {
-      if (result.isConfirmed) {
-        location.replace("usuarios");
-      }
-    });
+
+    let data = await response.json();
+
+    if (data.error) {
+      return;
+    } else {
+      Swal.fire("Empresa Eliminada!", "", "success").then((result) => {
+        if (result.isConfirmed) {
+          location.replace("usuarios");
+        }
+      });
+    }
   } catch (e) {
     console.log(e);
   }
 }
 
-async function ObtenerUsuario() {
-  let nombre_usuario_edit = document.getElementById("nombre_usuario_edit");
-  let password_edit = document.getElementById("password_edit");
-  let nombres_edit = document.getElementById("nombres_edit");
-  let apellido_paterno_edit = document.getElementById("apellido_paterno_edit");
-  let apellido_materno_edit = document.getElementById("apellido_materno_edit");
+async function obtenerEmpresa() {
+  let idEmpresa = document.getElementById("idEmpresa");
+  let logoEditado = document.getElementById("logoEditado");
+  let nombreEditado = document.getElementById("nombreEditado");
   let id_documento_edit = document.getElementById("id_documento_edit");
   let documento_edit = document.getElementById("documento_edit");
-  let idrol_edit = document.getElementById("idrol_edit");
+  let razon_social_edit = document.getElementById("razon_social_edit");
+  let nombre_edit = document.getElementById("nombre_edit");
+  let apellido_paterno_edit = document.getElementById("apellido_paterno_edit");
+  let apellido_materno_edit = document.getElementById("apellido_materno_edit");
+  let direccion_edit = document.getElementById("direccion_edit");
+  let telefono_edit = document.getElementById("telefono_edit");
 
   $(".a-editar").click(async function () {
-    let idUserEdit = this.dataset.id;
+    let idEmpresaEdit = this.dataset.id;
 
     try {
       let datosView = new FormData();
       datosView.append("consultar", "1");
-      datosView.append("idUsuario", idUserEdit);
-      let response = await fetch("controlador/user.controller.php", {
+      datosView.append("idEmpresa", idEmpresaEdit);
+      let response = await fetch("controlador/empresa.controller.php", {
         method: "POST",
         body: datosView,
       });
       let data = await response.json();
-      nombre_usuario_edit.value = data.nombre_usuario;
-      password_edit.value = data.password;
-      nombres_edit.value = data.nombres;
+      idEmpresa.value = data.id;
+      logoEditado.value = data.logo;
+      nombreEditado.value = data.logo_nombre;
+      documento_edit.value = data.documento;
+      id_documento_edit.value = data.id_documento;
+      razon_social_edit.value = data.razon_social;
+      nombre_edit.value = data.nombre;
       apellido_paterno_edit.value = data.apellido_paterno;
       apellido_materno_edit.value = data.apellido_materno;
-      id_documento_edit.value = data.id_documento;
-      documento_edit.value = data.documento;
-      idrol_edit.value = data.idrol;
-
-      editarUsuario(idUserEdit, "controlador/user.controller.php");
+      direccion_edit.value = data.direccion;
+      telefono_edit.value = data.telefono;
     } catch (e) {
       console.log(e);
     }
   });
 }
 
-async function editarUsuario(id, url) {
-  const formEditUser = document.querySelector("#formEditUser");
+async function editarEmpresa() {
+  const formEditEmpresa = document.querySelector("#formEditEmpresa");
 
-  formEditUser.addEventListener("submit", async (e) => {
+  formEditEmpresa.addEventListener("submit", async (e) => {
     e.preventDefault();
-    let datosEdit = new FormData(formEditUser);
+
+    let datosEdit = new FormData(formEditEmpresa);
     datosEdit.append("edit", "1");
-    datosEdit.append("idUsuario", id);
 
     try {
-      let response = await fetch(url, {
+      let response = await fetch("controlador/empresa.controller.php", {
         method: "POST",
         body: datosEdit,
       });
-      Swal.fire("Usuario Actualizado!", "", "success").then((result) => {
+
+      Swal.fire("Empresa Actualizada!", "", "success").then((result) => {
         if (result.isConfirmed) {
-          location.replace("usuarios");
+          location.replace("empresas");
         }
       });
     } catch (error) {

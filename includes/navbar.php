@@ -13,7 +13,7 @@
                 </a>
 
                 <a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
-                    <img src="img/avatar/<?= $_SESSION["foto"] != '' ? $_SESSION["foto"] : "fotoUserDefault.jpg"; ?>" class="avatar img-fluid rounded me-1" alt="Charles Hall" />
+                    <img src="<?= URL ?>/img/avatar/<?= $_SESSION["foto"] != '' ? $_SESSION["foto"] : "fotoUserDefault.jpg"; ?>" class="avatar img-fluid rounded me-1" alt="Charles Hall" />
                     <span class="text-dark"><?= $_SESSION["nombres"].' '.$_SESSION["apellido_paterno"] ?></span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">
@@ -25,7 +25,7 @@
                     <a class="dropdown-item" href="#"><i class="align-middle me-1" data-feather="help-circle"></i>
                         Ayuda</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="cerrar_sesion">Cerrar Sesión</a>
+                    <a class="dropdown-item" href="<?= URL ?>/cerrar_sesion">Cerrar Sesión</a>
                 </div>
             </li>
         </ul>
