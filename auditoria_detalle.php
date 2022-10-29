@@ -41,15 +41,17 @@ include "includes/header.php";
         <main class="content">
             <div class="container-fluid p-0">
                 <h1>Detalle Auditorias de <?= $nombre_empresa ?></h1>
-                <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addCalificacion">Agregar Detalle</button>
-                <table id="tableAuditoria" class="table table-striped" style="width:100%">
+                <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#addAuditoriaDetalle">Agregar Detalle</button>
+                <table id="tableAuditoriaDetalle" class="table table-striped" style="width:100%">
                     <thead>
                         <tr>
 
                             <th>Orden</th>
-                            <th>Documento</th>
-                            <th>Empresa</th>
+                            <th>Fecha</th>
                             <th>Usuario</th>
+                            <th>Propiedad</th>
+                            <th>Proceso</th>
+                            <th>Ciclo</th>
                             <th class="text-center">Acciones</th>
 
                         </tr>
@@ -57,18 +59,23 @@ include "includes/header.php";
                     <tbody>
                         <?php foreach ($auditoriaDetalles as $auditoriaDetalle) : ?>
                             <tr>
-                                <td><?= $auditoria["contador"]; ?></td>
-                                <td><?= $auditoria["documento"]; ?> </td>
-                                <td><?= $auditoria["razon_social"] . ' ' . $auditoria["nombre"] . ' ' . $auditoria["apellido_paterno"] . ' ' . $auditoria["apellido_materno"]; ?> </td>
-                                <td><?= $auditoria["nombre_usuario"]; ?> </td>
+                                <td><?= $auditoriaDetalle["contador"]; ?></td>
+                                <td><?= date( 'd-m-Y H:i:s',strtotime($auditoriaDetalle["fecha_creacion"])); ?> </td>
+                                <td><?= $auditoriaDetalle["nombre_usuario"]; ?> </td>
+                                <td><?= $auditoriaDetalle["propiedad"]; ?> </td>
+                                <td><?= $auditoriaDetalle["proceso"]; ?> </td>
+                                <td><?= $auditoriaDetalle["ciclo"]; ?> </td>
                                 <td>
                                     <div class="td_acciones ">
-                                        <a class="a-auditoria" href="auditoria_detalle/<?= $auditoria["id"];  ?>" data-id="<?= $auditoria["id"];  ?>">
-                                            <i class="align-middle" data-feather="layers"></i>
+                                        <a class="a-auditoria" href="auditoria_detalle/<?= $auditoriaDetalle["id"];  ?>" data-id="<?= $auditoriaDetalle["id"];  ?>">
+                                            <i class="align-middle" data-feather="edit-3"></i>
                                         </a>
 
-                                        <a class="a-eliminar" id="<?= $auditoria["id"]; ?>">
-                                            <i class="align-middle" data-feather="user-x"></i>
+                                        <a class="a-eliminar" id="<?= $auditoriaDetalle["id"]; ?>">
+                                            <i class="align-middle" data-feather="delete"></i>
+                                        </a>
+                                        <a class="a-ver" id="<?= $auditoriaDetalle["id"]; ?>">
+                                            <i class="align-middle" data-feather="eye"></i>
                                         </a>
                                     </div>
 
@@ -91,8 +98,8 @@ include "includes/header.php";
     </div>
 </div>
 
-<?php include("includes/auditoria/addModal.php"); ?>
-<?php include("includes/auditoria/editModal.php"); ?>
+<?php include("includes/auditoriaDetalle/addModal.php"); ?>
+<?php include("includes/auditoriaDetalle/editModal.php"); ?>
 
 <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
@@ -108,7 +115,7 @@ include "includes/header.php";
 
 
 
-<script src="<?= URL ?>/js/auditoria/auditoria.js"></script>
+<script src="<?= URL ?>/js/auditoriaDetalle/auditoriaDetalle.js"></script>
 
 
 <?php

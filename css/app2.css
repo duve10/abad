@@ -94,3 +94,8 @@
   background-color: #326abc;
   color: #fff;
 }
+
+.separador {
+  border-bottom: 1px dotted #ced4da;
+  padding-bottom: 5px;
+}

@@ -101,6 +101,21 @@ class Transaccion
         return $resultado->fetchAll();
     }
 
+    public function getTransaccionesApi($id_ciclo)
+    {
+
+        $sql = "SELECT  @i := @i + 1 as contador,n.id,n.descripcion,u.nombre_usuario,n.id_ciclo FROM transaccion as n
+        cross join (select @i := 0) r
+        left join usuario as u on u.id = n.id_usuario_creador
+        where n.estado=1 and n.id_ciclo=$id_ciclo 
+        ORDER BY n.descripcion";
+        $objeto = new Conexion();
+        $conexion = $objeto->Conectar();
+        $resultado = $conexion->prepare($sql);
+        $resultado->execute();
+        return json_encode(($resultado->fetchAll(PDO::FETCH_ASSOC)));
+    }
+
     public function getTransaccion()
     {
         $sql = "SELECT * FROM transaccion where id = ?";

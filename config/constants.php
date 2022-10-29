@@ -4,7 +4,6 @@
     //* VARIABLE DE SIDEBAR */
     $active_index = "";
     $active_usuarios = "";
-    $active_nivel1 = "";
     $active_maestros = "";
     $active_calificacion = "";
     $active_propiedad = "";

@@ -803,7 +803,7 @@ class AuditoriaDetalle
         if ($idRol == '2') {
             $where = ' and n.id_usuario_creador =' . $idUser;
         }
-        $sql = "SELECT  @i := @i + 1 as contador,t1.id,t2.nombre_usuario,t3.descripcion as propiedad,t4.descripcion as proceso,t5.descripcion as ciclo, t6.descripcion as transaccion, t7.descripcion as calificacion
+        $sql = "SELECT  @i := @i + 1 as contador,t1.id,t2.nombre_usuario,t3.descripcion as propiedad,t4.descripcion as proceso,t5.descripcion as ciclo, t6.descripcion as transaccion, t7.descripcion as calificacion, t1.fecha_creacion
         FROM auditoria_detalle as t1
         cross join (select @i := 0) r
         left join usuario as t2 on t2.id = t1.id_usuario_creador

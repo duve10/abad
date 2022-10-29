@@ -33,9 +33,6 @@
                     
                     <li class="sidebar-item <?php echo $active_propiedad; ?>"><a class="sidebar-link" href="<?= URL ?>/propiedad">Propiedad</a></li>
 
-                    <li class="sidebar-item <?php echo $active_nivel1; ?>"><a class="sidebar-link" href="<?= URL ?>/nivel1">Nivel 1</a></li>
-
-                    <li class="sidebar-item"><a class="sidebar-link" href="pages-sign-up.html">Tipos 2</a></li>
                 </ul>
             </li>
 

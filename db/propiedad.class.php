@@ -85,6 +85,21 @@ class Propiedad
         return $resultado->fetchAll();
     }
 
+    public function getPropiedadesApi()
+    {
+
+        $sql = "SELECT  @i := @i + 1 as contador,n.id,n.descripcion,u.nombre_usuario FROM propiedad as n
+        cross join (select @i := 0) r
+        left join usuario as u on u.id = n.id_usuario_creador
+        where n.estado=1
+        ORDER BY n.descripcion";
+        $objeto = new Conexion();
+        $conexion = $objeto->Conectar();
+        $resultado = $conexion->prepare($sql);
+        $resultado->execute();
+        return json_encode(($resultado->fetchAll(PDO::FETCH_ASSOC)));
+    }
+
     public function getPropiedad()
     {
         $sql = "SELECT * FROM propiedad where id = ?";
