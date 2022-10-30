@@ -18,12 +18,14 @@ $titulo = "Auditorias Detalle";
 //ACTIVAR SIDEBAR MODULO
 $active_auditoria = "active";
 
-$idempresa = $_GET["idempresa"];
+$id_auditoria = $_GET["id_auditoria"];
 
 //OBTENER LOS USUARIOS
-$auditoriaDetalles = getAuditoriaDetalles($_SESSION["id_usuario"], $_SESSION["idrol"], $idempresa);
+$auditoriaDetalles = getAuditoriaDetalles($_SESSION["id_usuario"], $_SESSION["idrol"], $id_auditoria);
 
-$empresa = '';
+$idempresa =  $_GET["id_empresa"];
+
+
 $empresa = extraeDatos('razon_social,id,nombre,apellido_paterno,apellido_materno','empresa','id',$idempresa);
 $nombre_empresa = $empresa["razon_social"].' '.$empresa["nombre"]. ' '.$empresa["apellido_paterno"].' '.$empresa["apellido_materno"];
 ?>

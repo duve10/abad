@@ -12,6 +12,8 @@
                     <div class="row g-3 mb-3 separador">
                         <div class="col-sm-6">
                             <div class="form-floating">
+                                <input type="hidden" id="id_empresa" name="id_empresa" value="<?= $_GET["id_empresa"] ?>">
+                                <input type="hidden" id="id_auditoria" name="id_auditoria" value="<?= $_GET["id_auditoria"] ?>">
                                 <select class="form-select" id="calificacion" name="idcalificacion" aria-label="calificacion">
                                     <option selected>Selecciona</option>
                                 </select>

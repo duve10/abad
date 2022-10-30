@@ -814,6 +814,7 @@ class AuditoriaDetalle
         left join calificacion t7 on t7.id = t1.id_calificacion
         where t1.estado=1 and t1.id_auditoria = $id_auditoria $where 
         ORDER BY t1.id desc";
+
         $objeto = new Conexion();
         $conexion = $objeto->Conectar();
         $resultado = $conexion->prepare($sql);

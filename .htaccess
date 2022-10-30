@@ -7,7 +7,7 @@ RewriteRule ^propiedad/([0-9]+)/([0-9a-zA-Z_-]+)/([0-9]+)/([0-9a-zA-Z_-]+) propi
 RewriteRule ^propiedad/([0-9]+)/([0-9a-zA-Z_-]+) propiedad.php?idPropiedad=$1&descripcion=$2
 RewriteRule ^propiedad/([0-9]+) propiedad.php?idPropiedad=$1
 
-RewriteRule ^auditoria_detalle/([0-9]+) auditoria_detalle.php?idempresa=$1
+RewriteRule ^auditoria_detalle/([0-9]+)/([0-9]+) auditoria_detalle.php?id_auditoria=$1&id_empresa=$2
 
 RewriteRule ^nivel1/([0-9]+) nivel1.php?id=$1
 RewriteRule ^nivel1/([0-9]+)/([0-9a-zA-Z_-]+) nivel1.php?id=$1&descripcion=$2

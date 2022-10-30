@@ -60,7 +60,7 @@ include "includes/header.php";
                                 <td><?= $auditoria["nombre_usuario"]; ?> </td>
                                 <td>
                                     <div class="td_acciones ">
-                                        <a class="a-auditoria" href="auditoria_detalle/<?= $auditoria["id_empresa"];  ?>"  data-id="<?= $auditoria["id"];  ?>" >
+                                        <a class="a-auditoria" href="auditoria_detalle/<?= $auditoria["id"];  ?>/<?= $auditoria["id_empresa"];  ?>"  data-id="<?= $auditoria["id"];  ?>" >
                                             <i class="align-middle" data-feather="layers"></i>
                                         </a>
 

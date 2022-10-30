@@ -9,22 +9,22 @@ document.addEventListener("DOMContentLoaded", () => {
   obtenerTransaccionSelect();
 
   // cleanModalClosed("editCalificacion");
-  // agregarAuditoria();
+  agregarAuditoriaDetalle();
   // agregarClaseEliminar();
   // obtenerCalificacion();
   // editarCalificacion();
 });
 
-function agregarAuditoria() {
-  const formAddAuditoria = document.querySelector("#formAddAuditoria");
+function agregarAuditoriaDetalle() {
+  const formAddAuditoriaDetalle = document.querySelector("#formAddAuditoriaDetalle");
 
-  formAddAuditoria.addEventListener("submit", async (e) => {
+  formAddAuditoriaDetalle.addEventListener("submit", async (e) => {
     e.preventDefault();
-    let datos = new FormData(formAddAuditoria);
+    let datos = new FormData(formAddAuditoriaDetalle);
     datos.append("save", "");
 
     try {
-      let response = await fetch("controlador/auditoria.controller.php", {
+      let response = await fetch("controlador/auditoriaDetalle.controller.php", {
         method: "POST",
         body: datos,
       });
